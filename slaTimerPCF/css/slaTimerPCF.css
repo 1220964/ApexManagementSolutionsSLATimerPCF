@@ -75,6 +75,11 @@
     margin-bottom: 1.5rem;
 }
 
+.sla-timer-card,
+.sla-header {
+  overflow: visible;
+}
+
 .sla-status-badge {
     display: flex;
     align-items: center;
@@ -264,6 +269,58 @@
     gap: 0.5rem;
 }
 
+/*TOOOLTIP CONTAINER*/
+.sla-status-badge.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  display: inline-block;
+  box-sizing: border-box;
+
+  background: #fff;
+  color: #111;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 6px 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+
+  white-space: nowrap;
+  line-height: 1.25;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .18s ease, visibility .18s ease;
+  pointer-events: none;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.06));
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sla-warning .tooltip-text { border-color: #ff8c00; }
+.sla-violated .tooltip-text { border-color: #d13438; }
+.sla-completed .tooltip-text { border-color: #107c10; }
+
 /* Responsive Design */
 @media screen and (max-width: 480px) {
     .sla-timer-card {
@@ -292,3 +349,5 @@
   max-width: 400px;
   margin: 0 auto;
 }
+
+

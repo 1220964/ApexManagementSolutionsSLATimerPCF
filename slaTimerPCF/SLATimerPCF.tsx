@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Label } from '@fluentui/react-components';
+import { Label, Tooltip } from '@fluentui/react-components';
 import { useEffect, useState } from "react";
 import { ISLATimerPCFProps } from './Interface/ISLATimerPCF';
 import { Spinner } from '@fluentui/react-components';
@@ -7,7 +7,7 @@ import { IconClock, IconAlertTriangle, IconCircleCheck, IconCircleX } from '@tab
 import { calculateSLA } from './calculateSLATimerFunctions';
 
 const STATUS = {
-  IN_PROGRESS: 1,
+  IN_PROGRESS: 455220001,
   COMPLETED: 2
 }
 
@@ -121,14 +121,18 @@ export const SLATimerPCF: React.FC<ISLATimerPCFProps> = ({ startDate, slaTargetH
   return (
     <div className="sla-timer-container">
       <div className={`sla-timer-card sla-${statusColor}`}>
-        <div className="sla-header">
-          <div className="sla-status-badge">
-            {getStatusIcon(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
-            <span className="sla-status-text">
-              {getStatusText(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
-            </span>
-          </div>
+       <div className="sla-header">
+        <div className={`sla-status-badge tooltip`}>
+          {getStatusIcon(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
+          <span className="sla-status-text">
+            {getStatusText(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
+          </span>
+
+          <span className="tooltip-text" role="tooltip" aria-hidden="true">
+            The SLA limit is automatically calculated from the activity's priority level.
+          </span>
         </div>
+      </div>
 
         <div className="sla-timer-display">
           {timeInfo.isCompleted ? (
