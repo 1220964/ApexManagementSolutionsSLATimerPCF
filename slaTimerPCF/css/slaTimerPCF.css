@@ -1,0 +1,294 @@
+/* Loading and Error States */
+.sla-loading-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.sla-loading-icon {
+    font-size: 40px;
+}
+
+.sla-loading-text {
+    font-size: 14px;
+    color: #0078D4;
+    font-weight: 500;
+}
+
+.sla-error-text {
+    font-size: 14px;
+    color: #C91432;
+    font-weight: 500;
+}
+
+/* Main Container */
+.sla-timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-height: 250px;
+}
+
+/* Timer Card */
+.sla-timer-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid;
+    min-width: 320px;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Status-based border colors */
+.sla-timer-card.sla-good {
+    border-color: #107c10;
+}
+
+.sla-timer-card.sla-warning {
+    border-color: #ff8c00;
+}
+
+.sla-timer-card.sla-critical {
+    border-color: #d13438;
+}
+
+.sla-timer-card.sla-violated {
+    border-color: #a4262c;
+}
+
+.sla-timer-card.sla-completed {
+    border-color: #107c10;
+    background: linear-gradient(135deg, #f0f9f0 0%, #ffffff 100%);
+}
+
+/* Header Section */
+.sla-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.sla-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.sla-good .sla-status-badge {
+    background-color: #d4edda;
+    color: #107c10;
+}
+
+.sla-warning .sla-status-badge {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.sla-critical .sla-status-badge,
+.sla-violated .sla-status-badge {
+    background-color: #f8d7da;
+    color: #a4262c;
+}
+
+.sla-completed .sla-status-badge {
+    background-color: #d4edda;
+    color: #107c10;
+}
+
+.status-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Timer Display */
+.sla-timer-display {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.sla-time-value {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: 'Segoe UI', monospace;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.sla-good .sla-time-value {
+    color: #107c10;
+}
+
+.sla-warning .sla-time-value {
+    color: #ff8c00;
+}
+
+.sla-critical .sla-time-value,
+.sla-violated .sla-time-value {
+    color: #d13438;
+}
+
+.sla-completed .sla-time-value {
+    color: #107c10;
+    font-size: 2rem;
+}
+
+.sla-time-label {
+    font-size: 0.875rem;
+    color: #605e5c;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* Overdue Pulse Animation */
+.sla-overdue-pulse {
+    animation: sla-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes sla-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Progress Bar */
+.sla-progress-container {
+    margin-bottom: 1.5rem;
+}
+
+.sla-progress-bar {
+    height: 8px;
+    background-color: #edebe9;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.sla-progress-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.sla-progress-good {
+    background-color: #107c10;
+}
+
+.sla-progress-warning {
+    background-color: #ff8c00;
+}
+
+.sla-progress-critical,
+.sla-progress-violated {
+    background-color: #d13438;
+}
+
+.sla-progress-text {
+    font-size: 0.75rem;
+    color: #605e5c;
+    text-align: center;
+}
+
+/* Details Section */
+.sla-details {
+    border-top: 1px solid #edebe9;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.sla-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sla-detail-label {
+    font-size: 0.875rem;
+    color: #605e5c;
+    font-weight: 500;
+}
+
+.sla-detail-value {
+    font-size: 0.875rem;
+    color: #323130;
+    font-weight: 600;
+    font-family: 'Segoe UI', monospace;
+}
+
+/* Not Started State */
+.sla-not-started {
+    text-align: center;
+    padding: 2rem;
+}
+
+.sla-clock-icon {
+    width: 48px;
+    height: 48px;
+    color: #8a8886;
+    margin-bottom: 1rem;
+}
+
+.sla-not-started-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #323130;
+    margin-bottom: 0.5rem;
+}
+
+.sla-not-started-subtext {
+    font-size: 0.875rem;
+    color: #605e5c;
+}
+
+/* Completed Display */
+.sla-completed-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+    .sla-timer-card {
+        min-width: 280px;
+        padding: 1rem;
+    }
+
+    .sla-time-value {
+        font-size: 2.5rem;
+    }
+
+    .sla-completed .sla-time-value {
+        font-size: 1.5rem;
+    }
+}
+
+/*to center the Timer in the form section */
+.sla-timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sla-timer-card {
+  max-width: 400px;
+  margin: 0 auto;
+}
