@@ -26,11 +26,10 @@
 
 /* Main Container */
 .sla-timer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
+    width: 100%;
+    padding: 1rem 0;
     min-height: 250px;
+    box-sizing: border-box;
 }
 
 /* Timer Card */
@@ -40,9 +39,13 @@
     padding: 1.5rem;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid;
-    min-width: 320px;
-    max-width: 400px;
+
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    min-height: 250px;
 }
 
 /* Status-based border colors */
@@ -70,7 +73,7 @@
 /* Header Section */
 .sla-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 1.5rem;
 }
@@ -277,8 +280,8 @@
 .tooltip-text {
   position: absolute;
   bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  transform: translateX(0);
   z-index: 1000;
 
   display: inline-block;
@@ -335,19 +338,6 @@
     .sla-completed .sla-time-value {
         font-size: 1.5rem;
     }
-}
-
-/*to center the Timer in the form section */
-.sla-timer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.sla-timer-card {
-  max-width: 400px;
-  margin: 0 auto;
 }
 
 

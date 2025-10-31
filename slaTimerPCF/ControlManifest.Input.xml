@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="apex" constructor="slaTimerPCF" version="0.0.3" display-name-key="slaTimerPCF" description-key="slaTimerPCF description" control-type="virtual" >
+  <control namespace="apex" constructor="slaTimerPCF" version="0.0.11" display-name-key="slaTimerPCF" description-key="slaTimerPCF description" control-type="virtual" >
     <!--external-service-usage node declares whether this 3rd party PCF control is using external service or not, if yes, this control will be considered as premium and please also add the external domain it is using.
     If it is not using any external service, please set the enabled="false" and DO NOT add any domain below. The "enabled" will be false by default.
     Example1:
@@ -41,6 +41,7 @@
       <platform-library name="React" version="16.14.0" />
       <platform-library name="Fluent" version="8.29.0" />
       <css path="css/slaTimerPCF.css" order="1" />
+      <css path="css/checklistProgress.css" order="2" />
       <!-- UNCOMMENT TO ADD MORE RESOURCES
       <resx path="strings/slaTimerPCF.1033.resx" version="1.0.0" />
       -->

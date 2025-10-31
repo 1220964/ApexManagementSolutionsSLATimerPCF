@@ -1,0 +1,179 @@
+/* Use the same width as the timer card */
+.checklist-container {
+  box-sizing: border-box;
+  max-width: var(--pcf-card-outer-width);
+  width: 100%;
+  margin: 0 auto;
+
+
+}
+
+/* Header */
+.checklist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+.checklist-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #323130;
+}
+
+.checklist-percentage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.1;
+}
+
+.checklist-percentage-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0078D4;
+}
+
+.checklist-percentage-label {
+  font-size: .75rem;
+  color: #605e5c;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* Progress bar */
+.checklist-progress-bar {
+  height: 8px;
+  background-color: #edebe9;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.checklist-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #0078D4 0%, #00bcf2 100%);
+  transition: width .45s ease;
+}
+
+/* Items */
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem;
+  border-radius: 6px;
+  background-color: #f9fafb;
+  border: 1px solid transparent;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+
+.checklist-item:hover {
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
+}
+
+/* State variants */
+.checklist-item-completed { background:#f0f9f0; border-color:#d4edda; }
+.checklist-item-waiting   { background:#fff8e6; border-color:#ffe8b3; }
+.checklist-item-blocked   { background:#fff5f5; border-color:#fecaca; }
+.checklist-item-pending   { background:#f9fafb; border-color:#e5e7eb; }
+
+.checklist-item-optional { opacity: .9; }
+
+/* Icon + content */
+.checklist-item-icon {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.checklist-icon { width: 24px; height: 24px; }
+.checklist-icon-completed { color:#107c10; }
+.checklist-icon-waiting   { color:#ff8c00; }
+.checklist-icon-blocked   { color:#a4262c; }
+.checklist-icon-pending   { color:#8a8886; }
+
+.checklist-item-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  min-width: 0; /* prevent overflow squeeze */
+}
+
+.checklist-item-label {
+  font-size: .875rem;
+  font-weight: 500;
+  color: #323130;
+  display: flex; align-items: center; gap: .5rem;
+}
+
+.checklist-item-optional-badge {
+  font-size: .625rem;
+  font-weight: 600;
+  color: #605e5c;
+  background: #edebe9;
+  padding: .125rem .375rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.checklist-item-status {
+  font-size: .75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.checklist-status-completed { color:#107c10; }
+.checklist-status-waiting   { color:#ff8c00; }
+.checklist-status-blocked   { color:#a4262c; }
+.checklist-status-pending   { color:#8a8886; }
+
+/* Loading */
+.checklist-loading {
+  display: flex; align-items:center; justify-content:center;
+  gap:.75rem; padding:2rem;
+}
+.checklist-loading-text { font-size:.875rem; color:#605e5c; }
+
+/* Footer */
+.checklist-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #edebe9;
+  display: flex; justify-content: flex-end;
+}
+
+.checklist-refresh-button {
+  padding: .5rem 1rem;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: .875rem; font-weight: 500; color:#323130;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, opacity .18s ease;
+}
+.checklist-refresh-button:hover:not(:disabled) { background:#e5e7eb; border-color:#d1d5db; }
+.checklist-refresh-button:disabled { opacity:.5; cursor:not-allowed; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .checklist-container { padding: 1rem; }
+  .checklist-header { flex-direction: column; align-items: flex-start; gap:.5rem; }
+  .checklist-percentage { align-items: flex-start; }
+  .checklist-item-content { flex-direction: column; align-items: flex-start; gap:.25rem; }
+  .checklist-item-status { align-self: flex-start; }
+}

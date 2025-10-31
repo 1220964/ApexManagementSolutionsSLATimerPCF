@@ -5,6 +5,7 @@ import { ISLATimerPCFProps } from './Interface/ISLATimerPCF';
 import { Spinner } from '@fluentui/react-components';
 import { IconClock, IconAlertTriangle, IconCircleCheck, IconCircleX } from '@tabler/icons-react';
 import { calculateSLA } from './calculateSLATimerFunctions';
+import { ChecklistProgress } from '../ChecklistProgress';
 
 const STATUS = {
   IN_PROGRESS: 455220001,
@@ -37,6 +38,7 @@ export const SLATimerPCF: React.FC<ISLATimerPCFProps> = ({ startDate, slaTargetH
     isCompleted: isCompleted(statusCode)
   };
 
+  //connvert ms -> hh:mm:ss
   const formatTime = (ms: number): string => {
     const absMs = Math.abs(ms);
     const hours = Math.floor(absMs / 3600000);
@@ -89,6 +91,7 @@ export const SLATimerPCF: React.FC<ISLATimerPCFProps> = ({ startDate, slaTargetH
     );
   }
 
+  //sla not active if activity hasn't started yet
   if (statusCode !== STATUS.IN_PROGRESS) {
     return (
       <div className="sla-timer-container">
@@ -103,6 +106,7 @@ export const SLATimerPCF: React.FC<ISLATimerPCFProps> = ({ startDate, slaTargetH
     );
   }  
 
+  //show placeholder if start date or target hours are not set yet
   if (!startDate || slaTargetHours === 0) {
     return (
       <div className="sla-timer-container">
@@ -118,76 +122,87 @@ export const SLATimerPCF: React.FC<ISLATimerPCFProps> = ({ startDate, slaTargetH
     );
   }
 
+  //main container displays: status badge, countdown timer, progress bar, details
   return (
+    // <div className="sla-sections">
     <div className="sla-timer-container">
       <div className={`sla-timer-card sla-${statusColor}`}>
-       <div className="sla-header">
-        <div className={`sla-status-badge tooltip`}>
-          {getStatusIcon(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
-          <span className="sla-status-text">
-            {getStatusText(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
-          </span>
+        <div className="sla-header">
+          <div className={`sla-status-badge tooltip`}>
+            {getStatusIcon(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
+            <span className="sla-status-text">
+              {getStatusText(timeInfo.percentageUsed, timeInfo.isOverdue, timeInfo.isCompleted)}
+            </span>
 
-          <span className="tooltip-text" role="tooltip" aria-hidden="true">
-            The SLA limit is automatically calculated from the activity's priority level.
-          </span>
+            <span className="tooltip-text" role="tooltip" aria-hidden="true">
+              {"The SLA limit is automatically calculated from the activity's priority level."}
+            </span>
+          </div>
         </div>
-      </div>
 
-        <div className="sla-timer-display">
-          {timeInfo.isCompleted ? (
-            <div className="sla-completed-display">
-              <div className="sla-time-value">COMPLETED</div>
-              <div className="sla-time-label">Activity Finished</div>
-            </div>
-          ) : timeInfo.isOverdue ? (
-            <>
-              <div className="sla-time-label">OVERDUE BY</div>
-              <div className="sla-time-value sla-overdue-pulse">
-                {formatTime(Math.abs(timeInfo.remainingMs))}
+          <div className="sla-timer-display">
+            {timeInfo.isCompleted ? (
+              <div className="sla-completed-display">
+                <div className="sla-time-value">COMPLETED</div>
+                <div className="sla-time-label">Activity Finished</div>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="sla-time-value">{formatTime(timeInfo.remainingMs)}</div>
-              <div className="sla-time-label">Time Remaining</div>
-            </>
+            ) : timeInfo.isOverdue ? (
+              <>
+                <div className="sla-time-label">OVERDUE BY</div>
+                <div className="sla-time-value sla-overdue-pulse">
+                  {formatTime(Math.abs(timeInfo.remainingMs))}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="sla-time-value">{formatTime(timeInfo.remainingMs)}</div>
+                <div className="sla-time-label">Time Remaining</div>
+              </>
+            )}
+          </div>
+
+          {!timeInfo.isCompleted && (
+            <div className="sla-progress-container">
+              <div className="sla-progress-bar">
+                <div
+                  className={`sla-progress-fill sla-progress-${statusColor}`}
+                  style={{ width: `${timeInfo.percentageUsed}%` }}
+                />
+              </div>
+              <div className="sla-progress-text">
+                {timeInfo.percentageUsed.toFixed(1)}% of time used
+              </div>
+            </div>
           )}
-        </div>
 
-        {!timeInfo.isCompleted && (
-          <div className="sla-progress-container">
-            <div className="sla-progress-bar">
-              <div
-                className={`sla-progress-fill sla-progress-${statusColor}`}
-                style={{ width: `${timeInfo.percentageUsed}%` }}
-              />
-            </div>
-            <div className="sla-progress-text">
-              {timeInfo.percentageUsed.toFixed(1)}% of time used
-            </div>
-          </div>
-        )}
-
-        <div className="sla-details">
-          <div className="sla-detail-row">
-            <span className="sla-detail-label">Elapsed Time</span>
-            <span className="sla-detail-value">{formatTime(timeInfo.elapsedMs)}</span>
-          </div>
-          <div className="sla-detail-row">
-            <span className="sla-detail-label">Target Time</span>
-            <span className="sla-detail-value">{slaTargetHours}h</span>
-          </div>
-          {timeInfo.isCompleted && slaOutcome && (
+          <div className="sla-details">
             <div className="sla-detail-row">
-              <span className="sla-detail-label">Outcome</span>
-              <span className="sla-detail-value">
-                {slaOutcome === 1 ? 'Met' : 'Violated'}
-              </span>
+              <span className="sla-detail-label">Elapsed Time</span>
+              <span className="sla-detail-value">{formatTime(timeInfo.elapsedMs)}</span>
             </div>
-          )}
-        </div>
+            <div className="sla-detail-row">
+              <span className="sla-detail-label">Target Time</span>
+              <span className="sla-detail-value">{slaTargetHours}h</span>
+            </div>
+            {timeInfo.isCompleted && slaOutcome && (
+              <div className="sla-detail-row">
+                <span className="sla-detail-label">Outcome</span>
+                <span className="sla-detail-value">
+                  {slaOutcome === 1 ? 'Met' : 'Violated'}
+                </span>
+              </div>
+            )}
+          </div>
       </div>
     </div>
+
+
+      /* <div className="checklist-card">
+        <ChecklistProgress
+          maintenanceActivityId={maintenanceActivityId}
+          context={context}
+        />        
+      </div>
+    </div> */
   );
 };
