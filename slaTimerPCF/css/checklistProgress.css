@@ -1,11 +1,8 @@
-/* Use the same width as the timer card */
 .checklist-container {
   box-sizing: border-box;
   max-width: var(--pcf-card-outer-width);
   width: 100%;
   margin: 0 auto;
-
-
 }
 
 /* Header */
@@ -110,7 +107,7 @@
   align-items: center;
   justify-content: space-between;
   gap: .5rem;
-  min-width: 0; /* prevent overflow squeeze */
+  min-width: 0;
 }
 
 .checklist-item-label {
